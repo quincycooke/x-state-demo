@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "create-react-app": "^1.2.1",
+    "typescript": "^5.4.2",
+    "xstate": "^5.9.1"
+  }
+}
