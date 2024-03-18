@@ -36,3 +36,111 @@
     transform: rotate(360deg);
   }
 }
+
+.green {
+  /*background-color: green;*/
+  background: radial-gradient(circle at 30px 30px, yellowgreen 50%, green);
+}
+
+.yellow {
+  /*background-color: goldenrod;*/
+  background: radial-gradient(
+    circle at 30px 30px,
+    rgb(218, 206, 32) 50%,
+    rgb(129, 98, 20)
+  );
+}
+
+.red {
+  /*background-color: firebrick;*/
+  background: radial-gradient(
+    circle at 30px 30px,
+    rgb(255, 66, 66) 50%,
+    rgb(138, 18, 18)
+  );
+}
+
+.redblink {
+  animation: redblink 2s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.off {
+  background: radial-gradient(circle at 30px 30px, #282c34, #000);
+}
+
+.lightBox {
+  width: 150px;
+  height: 450px;
+  background-color: #363636;
+}
+
+.light {
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  border-color: black;
+  border-width: 10px;
+  margin: 25px;
+}
+
+@keyframes redblink {
+  from {
+    background: radial-gradient(
+      circle at 30px 30px,
+      rgb(255, 66, 66) 50%,
+      rgb(138, 18, 18)
+    );
+  }
+  to {
+    background: radial-gradient(circle at 30px 30px, #282c34, #000);
+  }
+}
+
+.buttonBox {
+  width: auto;
+}
+
+button {
+  position: relative;
+  float: left;
+  margin: 5px;
+}
+
+button.disabled {
+  background-color: gray;
+  color: black;
+}
+
+.walkbox {
+  height: 50px;
+  width: 150px;
+}
+
+.walk {
+  font-family: "Arial Rounded MT Bold";
+  font-size: 36px;
+  font-weight: bolder;
+  color: white;
+}
+
+.walkblink {
+  animation: walkblink 0.7s infinite;
+  animation-timing-function: ease-in;
+}
+
+@keyframes walkblink {
+  from {
+    color: red;
+  }
+  to {
+    color: black;
+  }
+}
+
+.nowalk {
+  font-family: "Arial Rounded MT Bold";
+  font-size: 36px;
+  font-weight: bolder;
+  color: red;
+}

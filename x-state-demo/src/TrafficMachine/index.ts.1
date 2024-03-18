@@ -1,0 +1,106 @@
+import { assign, createMachine } from "xstate";
+
+interface LightContext {
+  elapsed: number;
+  interval: number;
+  light: string;
+}
+
+type LightEvent = {
+  type: "CHANGE";
+};
+
+interface LightStateSchema {
+  states: {
+    green: {};
+    yellow: {};
+    red: {};
+  };
+}
+
+export const lightMachine = createMachine<LightContext, LightStateSchema, LightEvent>(
+  {
+    //Machine Identifier
+    id: "light",
+
+    //Initial state
+    initial: "green",
+
+    //local context for entire machine
+    context: {
+      elapsed: 0,
+      interval: 1,
+      light: "green",
+    },
+
+    //State definitions
+    states: {
+      green: {
+        invoke: {
+          src: (context) => (cb) => {
+            const interval = setInterval(() => {
+              cb("CHANGE");
+            }, 4000 * context.interval);
+
+            return () => {
+              clearInterval(interval);
+            };
+          },
+        },
+        on: {
+          CHANGE: {
+            target: "yellow",
+            actions: assign<LightContext>({
+              elapsed: (ctx) => 0,
+              light: "yellow",
+            }),
+          },
+        },
+      },
+      yellow: {
+        invoke: {
+          src: (context) => (cb) => {
+            const interval = setInterval(() => {
+              cb("CHANGE");
+            }, 1000 * context.interval);
+
+            return () => {
+              clearInterval(interval);
+            };
+          },
+        },
+        on: {
+          CHANGE: {
+            target: "red",
+            actions: assign<LightContext>({
+              elapsed: (ctx) => 0,
+              light: "red",
+            }),
+          },
+        },
+      },
+      red: {
+        invoke: {
+          src: (context) => (cb) => {
+            const interval = setInterval(() => {
+              cb("CHANGE");
+            }, 4000 * context.interval);
+
+            return () => {
+              clearInterval(interval);
+            };
+          },
+        },
+        on: {
+          CHANGE: {
+            target: "green",
+            actions: assign<LightContext>({
+              elapsed: (ctx) => 0,
+              light: "green",
+            }),
+          },
+        },
+      },
+    },
+  }
+);
